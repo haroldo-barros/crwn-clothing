@@ -3,10 +3,12 @@ import React from 'react';
 import FormInput from '../form-input/form-input.comonent';
 import CustomeBtton from "../custom-button/custom-button.component";
 
+import { signInWithGoogle } from '../../firebase/firebase.utils';
+
 import './sign-in.styles.scss';
 
-class SignIn extends React.Component{
-    constructor(props){
+class SignIn extends React.Component {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -18,7 +20,7 @@ class SignIn extends React.Component{
     handleSubmit = event => {
         event.preventDefault();
 
-        this.setState({email: '', password: ''})
+        this.setState({ email: '', password: '' })
     }
 
     handleChange = event => {
@@ -28,31 +30,35 @@ class SignIn extends React.Component{
     }
 
     render() {
-        return(
+        return (
             <div className='sign-in'>
                 <h2>I already have an account</h2>
                 <span>Sign in with your email and password</span>
 
                 <form onSubmit={this.handleSubmit}>
-                    <FormInput 
-                    name='email' 
-                    type='email'
-                    handleChange={this.handleChange} 
-                    value={this.state.email} 
-                    label='email'
-                    required
+                    <FormInput
+                        name='email'
+                        type='email'
+                        handleChange={this.handleChange}
+                        value={this.state.email}
+                        label='email'
+                        required
                     />
-                    
-                    <FormInput 
-                        name='password' 
+
+                    <FormInput
+                        name='password'
                         type='password'
-                        value={this.state.email} 
+                        value={this.state.email}
                         handleChange={this.handleChange}
                         label='password'
                         required
-                        />
-
-                    <CustomeBtton type="submit"> Sign in</CustomeBtton>
+                    />
+                    <div className='button'>
+                        <CustomeBtton type="submit"> Sign in</CustomeBtton>
+                        <CustomeBtton onClick={signInWithGoogle} isGoogleSignIn>
+                            Sign in with Google
+                        </CustomeBtton>
+                    </div>
                 </form>
             </div>
         )
